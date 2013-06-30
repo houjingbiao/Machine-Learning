@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{b4574254-28bc-4054-8597-72f797187df6}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>clustering.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="clustering.py" />
+    <Compile Include="clusters.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="generatorfeedvector.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
