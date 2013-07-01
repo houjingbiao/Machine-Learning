@@ -1,5 +1,7 @@
 ##发现群组##
 
+### 分级聚类（Hierarchical Clustering） ###
+
 **分级聚类（Hierarchical Clustering）：**通过连续不断地将最为相似的组件两两合并，来构造出一个群组的层级结构。
 
 **树状图(dendrogram):**
@@ -9,11 +11,14 @@
     1.生成的树状图使用起来比较麻烦，仍然需要在树状图中进行查找
     2.每次都要计算两个向量之间的距离，计算量太大
 
+### 列聚类(column clustering) ###
+
+**列聚类(column clustering)：**就是每个单词作为节点聚类
 
 
-**列聚类(column clustering)**
+### k-均值聚类(k-means clustering) ###
+**k-均值聚类(k-means clustering)：**
 
-**k-均值聚类(k-means clustering)**
 
 
 
