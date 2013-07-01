@@ -12,6 +12,13 @@ def readfile(filename):
         data.append([float(x) for x in p[1:]])
     return rownames, colnames, data
 
+def rotatematrix(data):
+    newdata=[]
+    for i in range(len(data[0])):
+        newrow = [data[j][i] for j in range(len(data))]
+        newdata.append(newrow)
+    return newdata
+
 from math import sqrt
 def pearson(v1, v2):
     sum1 = sum(v1)
@@ -132,3 +139,101 @@ def drawdendrogram(clust, labels, jpeg='cluster.jpg'):
     drawnode(draw, clust, 10, (h/2), scaling, labels)
     img.save(jpeg, 'JPEG')
     
+import random
+def kcluster(rows, distance=pearson, k=4):
+    #to determine the maximum and minimum value for each point
+    ranges1=[(min(rows[i][j] for j in range(len(rows[0]))), max(rows[i][j] for j in range(len(rows[0])))) for i in range(len(rows))]
+    ranges=[(min([row[i] for row in rows]), max([row[i] for row in rows])) for i in range(len(rows[0]))]
+
+    #create k center point randomly
+    clusters=[[random.random()*(ranges[i][1]-ranges[i][0])+ranges[i][0] for i in range(len(rows[0]))] for j in range(k)]
+
+    lastmatches=None
+    for t in range(100):
+        print 'Iteration %d' % t
+        bestmatches=[[] for i in range(k)]
+
+        for j in range(len(rows)):
+            row=rows[j]
+            bestmatch = 0
+            for i in range(k):
+                d = distance(row, clusters[i])
+                if d < distance(row, clusters[bestmatch]): bestmatch=i
+            bestmatches[bestmatch].append(j)
+
+        if bestmatches == lastmatches: break
+        lastmatches = bestmatches
+
+        #update the k center
+        for i in range(k):
+            avgs=[0.0]*len(rows[0])
+            if len(bestmatches[i])>0:
+                for rowid in bestmatches[i]:
+                    for m in range (len(rows[rowid])):
+                        avgs[m]+=rows[rowid][m]
+                for j in range(len(avgs)):
+                    avgs[j]/=len(bestmatches[i])
+                clusters[i]=avgs
+    return bestmatches
+
+def tanimoto(v1, v2):
+    c1, c2, shr=0,0,0
+
+    for i in range(len(v1)):
+        if v1[i] != 0: c1+=1
+        if v2[i] != 0: c2+=1
+        if v1[i] != 0 and v2[i] != 0: shr+=1
+
+    return 1.0-(float(shr)/(c1+c2-shr))
+
+def draw2d(data, labels, jpeg='mds2d.jpg'):
+    img = Image.new('RGB', (2000, 2000), (255, 255, 255))
+    draw = ImageDraw.Draw(img)
+
+    for i in range(len(data)):
+        x = (data[i][0]+0.5)*1000
+        y = (data[i][1]+0.5)*1000
+        draw.text((x, y), labels[i], (0, 0, 0))
+    img.save(jpeg, 'JPEG')
+
+
+def scaledown(data, labels, distance = pearson, rate=0.01):
+    n = len(data)
+
+    realdist = [[distance(data[i], data[j]) for j in range(n)] for i in range(n)]
+
+    #outersum = 0.0
+
+    #innitialize location for each node randomly
+    loc = [[random.random(), random.random()] for i in range(n)]
+    fakedist = [[0.0 for i in range(n)] for j in range(n)]
+
+    lasterror=None
+    for m in range(0, 1000):
+        for i in range(n):
+            for j in range(n):
+                fakedist[i][j] = sqrt(sum([pow(loc[i][x]-loc[j][x], 2) for x in range(len(loc[i]))]))
+
+        grad = [[0.0 for x in range(len(loc[0]))] for i in range(n)]
+
+        #get all
+        totalerror = 0
+        for k in range(n):
+            for j in range(n):
+                if k == j: continue
+                errorterm = (fakedist[j][k]-realdist[j][k])/realdist[j][k]
+                for x in range(len(loc[0])):
+                    grad[k][x]+=((loc[k][x]-loc[j][x])/fakedist[j][k])*errorterm
+                totalerror += abs(errorterm)
+        print totalerror
+
+        if lasterror and lasterror < totalerror: break
+        lasterror = totalerror
+
+        for k in range(n):
+            for x in range(len(loc[0])):
+                loc[k][x]-=rate*grad[k][x]
+        imagename = ('mds_iter%d' % m)+'.jpg'
+        draw2d(loc, labels, imagename)
+    return loc
+
