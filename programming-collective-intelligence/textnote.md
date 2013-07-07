@@ -20,7 +20,7 @@
 **k-均值聚类(k-means clustering)：**
 
 
-##chapter 5 搜索引擎的组成##
+##chapter 4 搜索引擎的组成##
 
 **搜集文档**
 为文档建立索引
@@ -29,28 +29,29 @@
 基于网页内容的度量方法：单词频度
 基于网页外部信息的度量方法：Pangerank
 
-### 分级聚类（Hierarchical Clustering） ###
 
-**分级聚类（Hierarchical Clustering）：**通过连续不断地将最为相似的组件两两合并，来构造出一个群组的层级结构。
-
-**树状图(dendrogram):**
-
-**聚类的紧致程度**
-
-    1.生成的树状图使用起来比较麻烦，仍然需要在树状图中进行查找
-    2.每次都要计算两个向量之间的距离，计算量太大
-
-### 列聚类(column clustering) ###
-
-**列聚类(column clustering)：**就是每个单词作为节点聚类
+**神经网络**
 
 
-### k-均值聚类(k-means clustering) ###
-**k-均值聚类(k-means clustering)：**
+## chapter 5 optimization 优化 ##
+**结果表达**
+
+**代价函数**
+
+**随机搜索**
+
+**爬山法hillclimb**
+
+**模拟退火anealing**
+
+**遗传算法**
 
 
+## chapter 6文档过滤document filtering ##
 
+## chapter 7决策树建模 ##
 
+## chapter 8构建价格模型 ##
 
 
 ## 欢迎使用 MarkdownPad 2 ##
