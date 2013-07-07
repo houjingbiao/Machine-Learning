@@ -14,3 +14,4 @@ for line in file('schedule.txt'):
 def getminites(t):
     x = time.strptime(t, '%h:%M')
     return x[3]*60+x[4]
+
