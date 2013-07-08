@@ -73,7 +73,8 @@ def randomoptimize(domain, costf):
         if cost<best:
             best=cost
             bestr=r
-            print cost
+            #print cost
+    print costf(bestr)
     return bestr
 
 def hillclimb(domain, costf):
@@ -90,14 +91,16 @@ def hillclimb(domain, costf):
         current=costf(sol)
         best = current
         for j in range(len(neighbors)):
-            print neighbors[j]
+            #print neighbors[j]
             cost = costf(neighbors[j]) 
             if cost < best:
-                cost = best
+                best = cost
                 sol = neighbors[j]
-                print cost
+                #print cost
 
-        if best == current: break
+        if best == current: 
+            print best
+            break
     return sol
 
 def annealingoptimize(domain, costf, T=10000.0, cool=0.95, step=1):
@@ -110,20 +113,14 @@ def annealingoptimize(domain, costf, T=10000.0, cool=0.95, step=1):
 
         vecb=vec[:]
         vecb[i]+=dir
-        print vec
-        print vecb
         if vecb[i]<domain[i][0]: vecb[i]=domain[i][0]
         elif vecb[i]>domain[i][1]: vecb[i]=domain[i][1]
 
         ea=costf(vec)
         eb=costf(vecb)
-        print ea
-        print eb
-
-        #rdm = random.random()
-        #ppp = pow(math.e, -(eb-ea)/T)
         if(eb<ea or random.random() < pow(math.e, -(eb-ea)/T)):
             vec = vecb
         T=T*cool
+    print costf(vec)
     return vec
 

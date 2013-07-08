@@ -6,16 +6,20 @@ import Optimization
 
 domain=[(0,9)]*(len(Optimization.people)*2)
 
-print '------random------'
-s = Optimization.randomoptimize(domain, Optimization.schedulecost)
-Optimization.printschedule(s)
+#print '------random------'
+#s = Optimization.randomoptimize(domain, Optimization.schedulecost)
+#Optimization.printschedule(s)
 
-print '------hillclimb------'
-s = Optimization.hillclimb(domain, Optimization.schedulecost)
-Optimization.printschedule(s)
+#print '------hillclimb------'
+#s = Optimization.hillclimb(domain, Optimization.schedulecost)
+#Optimization.printschedule(s)
 
-print '------annealing------'
-s = Optimization.annealingoptimize(domain, Optimization.schedulecost)
+#print '------annealing------'
+#s = Optimization.annealingoptimize(domain, Optimization.schedulecost)
+#Optimization.printschedule(s)
+
+print '------genetic------'
+s = Optimization.geneticoptimize(domain, Optimization.schedulecost)
 Optimization.printschedule(s)
 
 print 'Hello world!'
