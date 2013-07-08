@@ -15,8 +15,18 @@ class classifier:
         self.fc = {}
         # statistics: the number of documents in each class
         self.cc = {}
+        
+        self.thresholds={}
 
         self.getfeatures=getfeatures
+
+    def setthreshold(self, cat, t):
+        self.thresholds[cat] = t
+
+    def getthreshold(self, cat):
+        if cat in self.thresholds:
+            return self.thresholds[cat]
+        return 1.0
 
     def incf(self, f, cat):
         self.fc.setdefault(f, {})
@@ -65,6 +75,23 @@ class classifier:
         bp = ((weight*ap)+(totals*basicprob))/(weight+totals)
         return bp
 
+    def classify(self, item, default = None):
+        probs={}
+
+        max = 0.0
+        for cat in self.categories():
+            probs[cat] = self.prob(item, cat)
+            if probs[cat] > max:
+                max = probs[cat]
+                best = cat
+
+        for cat in probs:
+            if cat == best: continue
+            if probs[cat]*self.getthreshold(best)>probs[best]:return default
+        
+        return best
+
+
 class naivebayes(classifier):
     
     def docprob(self, item, cat):
@@ -74,7 +101,14 @@ class naivebayes(classifier):
         for f in features: p*=self.weightedprob(f, cat, self.fprob)
         return p
 
-    def fprob(self, f, cat):
-        catprob=self.catcount(cat)/self.totalcount()
+    def prob(self, item, cat):
+        catprob=float(self.catcount(cat))/float(self.totalcount())
         docprob=self.docprob(item, cat)
         return docprob*catprob
+
+def sampletrain(c1):
+    c1.train("Nobody owns the water.", "good")
+    c1.train("The quick rabbit jumps fences.", "good")
+    c1.train("buy pharmaceuticals now", "bad")
+    c1.train("ake quick mony in the online casino.", "bad")
+    c1.train("the quick brown jumps over the lazy dog.", "good")
