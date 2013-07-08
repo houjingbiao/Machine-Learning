@@ -1,6 +1,6 @@
-##chapter 3 发现群组##
+##chapter 03 发现群组##
 
-### 分级聚类（Hierarchical Clustering） ###
+### 1. 分级聚类（Hierarchical Clustering） ###
 
 **分级聚类（Hierarchical Clustering）：**通过连续不断地将最为相似的组件两两合并，来构造出一个群组的层级结构。
 
@@ -11,16 +11,16 @@
     1.生成的树状图使用起来比较麻烦，仍然需要在树状图中进行查找
     2.每次都要计算两个向量之间的距离，计算量太大
 
-### 列聚类(column clustering) ###
+### 2. 列聚类(column clustering) ###
 
 **列聚类(column clustering)：**就是每个单词作为节点聚类
 
 
-### k-均值聚类(k-means clustering) ###
+### 3. k-均值聚类(k-means clustering) ###
 **k-均值聚类(k-means clustering)：**
 
 
-##chapter 4 搜索引擎的组成##
+##chapter 04 搜索引擎的组成##
 
 **搜集文档**
 为文档建立索引
@@ -33,12 +33,13 @@
 **神经网络**
 
 
-## chapter 5 optimization 优化 ##
-**结果表达**
+## chapter 05 optimization 优化 ##
+### **1. 结果表达** ###
 
-**代价函数**
+### **2. 代价函数** ###
 
-**优化方法：**就是建立一个循环的过程，在这个过程中使得结果越来越好。循环的结束条件是什么？每次循环更新的部分是什么？能否找到全局最优解
+### **3. 优化方法：** ###
+就是建立一个循环的过程，在这个过程中使得结果越来越好。循环的结束条件是什么？每次循环更新的部分是什么？能否找到全局最优解
 
 **随机搜索：**没有考虑空间内点与点之间的关系
 
@@ -51,17 +52,39 @@
 
 
 
-## chapter 6文档过滤document filtering ##
+## chapter 06文档过滤document filtering ##
 
 本质上是文档的分类问题
 
 **分类器：**一个分类器包含特征，类别，以及特征和类别之间的联系
 
+**朴素的贝叶斯方法naivebayes:**
+
+**费舍尔方法fisher:**
 
 
-## chapter 7决策树建模 ##
 
-## chapter 8构建价格模型 ##
+## chapter 07决策树建模 ##
+
+dafd 
+dfasdfdsafdsf 
+fdsaf
+
+
+adfadsfdsf
+
+## chapter 08构建价格模型 ##
+
+## chapter 09高阶分类：核方法与SVM ##
+
+
+## chapter 10寻找独立特征 ##
+
+## chapter 11智能进化 ##
+
+## chapter 12算法总结 ##
+
+
 
 
 
