@@ -64,6 +64,18 @@
 
 **费舍尔方法fisher:**
 
+    Pr(category|feature)=具有指定特征且属于该分类的文档数/具有指定特征的文档总数
+具体的计算方法如下:
+属于某分类的概率clf=Pr(feature|category)
+
+属于所有分类的概率freqsum=Pr(feature|category)
+
+cprob=clf/(clf+nclf)
+
+combining the Probabilities:
+假设：各个特征之间是独立同分布的，因此服从对数卡方分布
+
+
 
 
 ## chapter 07决策树建模 ##
